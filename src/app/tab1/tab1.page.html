@@ -1,17 +1,63 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Status Page
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+    <ion-toolbar mode="ios">
+      <ion-title size="large">Status Page</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card color="primary">
+    <ion-card-header>
+      <ion-card-title>
+        Infected
+      </ion-card-title>
+      <ion-card-subtitle>
+        Number of Infected Patients
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text *ngIf="fetchedData.confirmed">
+        <h1 [countUp]="fetchedData.confirmed.value">0</h1>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  <ion-card color="success">
+    <ion-card-header>
+      <ion-card-title>
+        Recovered
+      </ion-card-title>
+      <ion-card-subtitle>
+        Number of Recovered Patients
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text *ngIf="fetchedData.recovered">
+        <h1 [countUp]="fetchedData.recovered.value">0</h1>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  <ion-card color="danger">
+    <ion-card-header>
+      <ion-card-title>
+        Deaths
+      </ion-card-title>
+      <ion-card-subtitle>
+        Number of Deaths due to COVID-19
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text *ngIf="fetchedData.deaths">
+        <h1 [countUp]="fetchedData.deaths.value">0</h1>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  <ion-text>
+    <p class="lastUpdate">Last updated on {{fetchedData.lastUpdate}}</p>
+  </ion-text>
 </ion-content>
