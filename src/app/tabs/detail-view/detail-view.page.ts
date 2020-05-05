@@ -64,7 +64,7 @@ export class DetailViewPage implements OnInit {
             backgroundColor: 'rgba(255, 0, 0, 0.5)',
             fill: true,
           }]
-        }
+        },
       })
     } catch (error) {
 
@@ -81,13 +81,13 @@ export class DetailViewPage implements OnInit {
           datasets: [{
             label: 'People',
             backgroundColor: [
-              'rgba(0,0,255,0.5)',
-              'rgba(0,255,0,0.5)',
-              'rgba(255,0,0,0.5)',
+              '#3880ff',
+              '#2dd36f',
+              '#eb445a',
             ],
             data: [data.confirmed.value, data.recovered.value, data.deaths.value]
           }]
-        }
+        },
       })
     } catch (error) {
     }

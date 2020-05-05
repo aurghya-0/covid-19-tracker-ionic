@@ -6,10 +6,6 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
-  {
-    path: 'detail-view',
-    loadChildren: () => import('./detail-view/detail-view.module').then( m => m.DetailViewPageModule)
-  }
 ];
 @NgModule({
   imports: [
@@ -17,4 +13,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

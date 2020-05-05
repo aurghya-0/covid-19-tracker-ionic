@@ -9,16 +9,15 @@ const routes: Routes = [
     children: [
       {
         path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
         path: 'detail-view',
-        loadChildren: () => import('../detail-view/detail-view.module').then(m => m.DetailViewPageModule)
+        loadChildren: () => import('./detail-view/detail-view.module').then(m => m.DetailViewPageModule)
       },
       {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
+        path: 'about-page',
+        loadChildren: () => import('./about-page/about-page.module').then(m => m.AboutPagePageModule)
       }
     ]
   },

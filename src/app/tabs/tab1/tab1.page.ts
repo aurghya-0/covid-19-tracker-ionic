@@ -8,9 +8,11 @@ import axios from 'axios';
 })
 export class Tab1Page {
   fetchedData: any = {};
+  date: string;
   constructor() {
     axios.get('https://covid19.mathdro.id/api').then((data) => {
       this.fetchedData = data.data;
+      this.date = new Date(data.data.lastUpdate).toDateString();
     });
   }
 
