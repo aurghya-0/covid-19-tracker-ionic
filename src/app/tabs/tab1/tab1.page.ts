@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import axios from 'axios';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-tab1',
@@ -9,11 +9,10 @@ import axios from 'axios';
 export class Tab1Page {
   fetchedData: any = {};
   date: string;
-  constructor() {
-    axios.get('https://covid19.mathdro.id/api').then((data) => {
-      this.fetchedData = data.data;
-      this.date = new Date(data.data.lastUpdate).toDateString();
+  constructor(private readonly api: ApiService) {
+    api.fetchData().then((data) => {
+      this.fetchedData = data;
+      this.date = new Date(data.lastUpdate).toDateString();
     });
   }
-
 }

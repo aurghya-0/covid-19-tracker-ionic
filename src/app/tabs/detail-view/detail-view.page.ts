@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 import axios from 'axios';
 import { Chart } from 'chart.js';
 
@@ -22,13 +23,14 @@ export class DetailViewPage implements OnInit {
 
   showList: boolean = false;
 
-  constructor() {
-    axios.get('https://covid19.mathdro.id/api/countries').then((data) => {
-      this.countries = data.data.countries.map((country, index) => { return country.name });
-    });
+  constructor(private readonly api: ApiService) {
+
   }
 
   ngOnInit() {
+    this.api.fetchCountries().then((countries) => {
+      this.countries = countries;
+    });
     this.createLineChart();
   }
 
@@ -38,59 +40,44 @@ export class DetailViewPage implements OnInit {
   }
 
   async createLineChart() {
-    try {
-      const { data } = await axios.get('https://covid19.mathdro.id/api/daily');
-      const modifiedData = data.map((dailyData) => ({
-        confirmed: dailyData.confirmed.total,
-        deaths: dailyData.deaths.total,
-        date: dailyData.reportDate,
-      }));
-      console.log(modifiedData);
-
-      this.lines = new Chart(this.lineChart.nativeElement, {
-        type: 'line',
-        data: {
-          labels: modifiedData.map(({ date }) => date),
-          datasets: [{
-            data: modifiedData.map(({ confirmed }) => confirmed),
-            label: "Infected",
-            backgroundColor: 'rgba(0, 0, 255, 0.5)',
-            borderColor: '#3333ff',
-            fill: true,
-          }, {
-            data: modifiedData.map(({ deaths }) => deaths),
-            label: "Deaths",
-            borderColor: 'red',
-            backgroundColor: 'rgba(255, 0, 0, 0.5)',
-            fill: true,
-          }]
-        },
-      })
-    } catch (error) {
-
-    }
+    const modifiedData = await this.api.fetchDailyData();
+    this.lines = new Chart(this.lineChart.nativeElement, {
+      type: 'line',
+      data: {
+        labels: modifiedData.map(({ date }) => date),
+        datasets: [{
+          data: modifiedData.map(({ confirmed }) => confirmed),
+          label: "Infected",
+          backgroundColor: 'rgba(0, 0, 255, 0.5)',
+          borderColor: '#3333ff',
+          fill: true,
+        }, {
+          data: modifiedData.map(({ deaths }) => deaths),
+          label: "Deaths",
+          borderColor: 'red',
+          backgroundColor: 'rgba(255, 0, 0, 0.5)',
+          fill: true,
+        }]
+      },
+    })
   }
 
   async createBarChart(country: string) {
-    try {
-      const { data } = await axios.get(`https://covid19.mathdro.id/api/countries/${country}`);
-      this.bars = new Chart(this.barChart.nativeElement, {
-        type: 'bar',
-        data: {
-          labels: ['Infected', 'Recovered', 'Deaths'],
-          datasets: [{
-            label: 'People',
-            backgroundColor: [
-              '#3880ff',
-              '#2dd36f',
-              '#eb445a',
-            ],
-            data: [data.confirmed.value, data.recovered.value, data.deaths.value]
-          }]
-        },
-      })
-    } catch (error) {
-    }
+    const { confirmed, recovered, deaths } = await this.api.fetchData(country);
+    this.bars = new Chart(this.barChart.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: ['Infected', 'Recovered', 'Deaths'],
+        datasets: [{
+          label: 'People',
+          backgroundColor: [
+            '#3880ff',
+            '#2dd36f',
+            '#eb445a',
+          ],
+          data: [confirmed.value, recovered.value, deaths.value]
+        }]
+      },
+    })
   }
-
 }
