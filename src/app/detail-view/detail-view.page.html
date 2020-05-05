@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detail Page</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar mode="ios">
+      <ion-title size="large">Detail Page</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-title>
+        Global Trend
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineChart></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header color="tertiary">
+      <ion-card-title>
+        {{country}} Status
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-select placeholder="Select Country" (ionChange)="selectClicked($event.detail.value)">
+        <ion-select-option *ngFor="let country of countries" [value]="country">{{country}}</ion-select-option>
+      </ion-select>
+      <canvas #barChart></canvas>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

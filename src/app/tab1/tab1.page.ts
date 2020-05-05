@@ -11,7 +11,7 @@ export class Tab1Page {
   constructor() {
     axios.get('https://covid19.mathdro.id/api').then((data) => {
       this.fetchedData = data.data;
-    })
+    });
   }
 
 }
