@@ -1,7 +1,7 @@
 # COVID-19 Tracker App
 ## Ionic (Angular/Typescript) Based App for tracking 
 
-![ios screenshot](ios-screenshot.png)
+<img src="ios-screenshot.png" height="400" width="auto"></img>
 
 ### How to work with it?
 1. Clone the repository with `git clone https://github.com/aurghya-0/covid-19-tracker-ionic`.
