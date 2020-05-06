@@ -1,7 +1,8 @@
 {
   "name": "ion-a",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular",
   "id": "a7e3c7bf"
