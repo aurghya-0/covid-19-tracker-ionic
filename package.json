@@ -1,8 +1,12 @@
 {
   "name": "ion-a",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "homepage": "https://github.com/aurghya-0/covid-19-tracker-ionic",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurghya-0/covid-19-tracker-ionic"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -60,5 +64,5 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project"
+  "description": "COVID-19 Tracker made with ionic"
 }
