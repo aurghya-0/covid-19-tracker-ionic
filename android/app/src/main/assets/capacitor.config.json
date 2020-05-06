@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "ion-a",
+  "appId": "com.webedutech.covidtrack",
+  "appName": "COVID-19 Tracker",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
